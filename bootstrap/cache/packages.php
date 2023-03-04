@@ -132,6 +132,13 @@
       0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
   'rachidlaasri/laravel-installer' => 
   array (
     'providers' => 
@@ -144,6 +151,13 @@
     'providers' => 
     array (
       0 => 'Spatie\\Honeypot\\HoneypotServiceProvider',
+    ),
+  ),
+  'spatie/laravel-translatable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Translatable\\TranslatableServiceProvider',
     ),
   ),
   'srmklive/paypal' => 

@@ -14,6 +14,7 @@
         "biscolab/laravel-recaptcha": "^4.2",
         "cmgmyr/messenger": "^2.20",
         "cnvs/canvas": "^5.3",
+        "doctrine/dbal": "2.*",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "6.5.2",
         "instamojo/instamojo-php": "^0.4.0",
@@ -29,11 +30,12 @@
         "mews/purifier": "^3.2",
         "nicolaslopezj/searchable": "1.*",
         "rachidlaasri/laravel-installer": "^4.0",
+        "razorpay/razorpay": "2.*",
+        "spatie/laravel-translatable": "4.6.*",
         "spatie/opening-hours": "^2.10",
         "srmklive/paypal": "^1.7",
         "stripe/stripe-php": "^7.53",
-        "sundarocs/laravel-review-rateable": "^1.2",
-        "razorpay/razorpay": "2.*"
+        "sundarocs/laravel-review-rateable": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

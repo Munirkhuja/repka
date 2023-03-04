@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
+    use HasTranslations;
+
     const CATEGORIES_SORT_BY_NEWEST_CREATED = 1;
     const CATEGORIES_SORT_BY_OLDEST_CREATED = 2;
     const CATEGORIES_SORT_BY_NEWEST_UPDATED = 3;
@@ -40,6 +42,7 @@ class Category extends Model
      *
      * @var array
      */
+    public $translatable = ['category_name'];
     protected $fillable = [
         'category_name',
         'category_slug',
