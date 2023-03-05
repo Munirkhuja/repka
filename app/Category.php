@@ -43,6 +43,7 @@ class Category extends Model
      * @var array
      */
     public $translatable = ['category_name'];
+
     protected $fillable = [
         'category_name',
         'category_slug',

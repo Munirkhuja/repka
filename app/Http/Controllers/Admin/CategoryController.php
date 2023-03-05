@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Setting;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Carbon\Carbon;
 use Exception;
@@ -172,7 +173,6 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required|unique:categories,category_name|max:255',
             'category_slug' => 'required|unique:categories,category_slug|regex:/^[\w-]*$/|max:255',
             'category_parent_id' => 'required|numeric',
             'category_description' => 'nullable|max:255',
@@ -184,8 +184,29 @@ class CategoryController extends Controller
             'category_header_background_image' => 'nullable',
             'category_header_background_youtube_video' => 'nullable|url',
         ]);
-
-        $category_name = $request->category_name;
+        $site_global_settings=Setting::find(1);
+        $category_name_tranlate=[];
+        /**
+         * Start validate submission
+         */
+        $validate_error = array();
+        foreach (Setting::LANGUAGES as $setting_languages_key => $language){
+            if (!\Illuminate\Support\Facades\Schema::hasTable('settings_languages')){
+                continue;
+            }
+            if ($site_global_settings->settingLanguage->$language == \App\SettingLanguage::LANGUAGE_ENABLE){
+                if ($request->has('category_name_'. $setting_languages_key)
+                    &&!empty($request->input('category_name_'. $setting_languages_key))){
+                    $category_name=$request->input('category_name_'. $setting_languages_key);
+                    $category_name_exist = Category::where('category_name->'.$setting_languages_key, $category_name)->count();
+                    if($category_name_exist > 0) {
+                        $validate_error['category_name_'. $setting_languages_key] = __('categories.category-name-taken-error').' '. $setting_languages_key;
+                        break;
+                    }
+                    $category_name_tranlate[$setting_languages_key]=$category_name;
+                }
+            }
+        }
         $category_slug = strtolower($request->category_slug);
         $category_description = empty($request->category_description) ? null : $request->category_description;
         $category_parent_id = empty($request->category_parent_id) ? null : $request->category_parent_id;
@@ -199,10 +220,6 @@ class CategoryController extends Controller
         $category_header_background_image = empty($request->category_header_background_image) ? null : $request->category_header_background_image;
         $category_header_background_youtube_video = empty($request->category_header_background_youtube_video) ? null : $request->category_header_background_youtube_video;
 
-        /**
-         * Start validate submission
-         */
-        $validate_error = array();
 
         if(!empty($category_parent_id))
         {
@@ -286,7 +303,7 @@ class CategoryController extends Controller
 
         $category = new Category();
 
-        $category->category_name = $category_name;
+        $category->setTranslations('category_name',$category_name_tranlate);
         $category->category_slug = $category_slug;
         $category->category_parent_id = $category_parent_id;
         $category->category_description = $category_description;
@@ -358,7 +375,6 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'category_name' => 'required|max:255',
             'category_slug' => 'required|regex:/^[\w-]*$/|max:255',
             'category_parent_id' => 'required|numeric',
             'category_description' => 'nullable|max:255',
@@ -371,7 +387,31 @@ class CategoryController extends Controller
             'category_header_background_youtube_video' => 'nullable|url',
         ]);
 
-        $category_name = $request->category_name;
+        /**
+         * Start validate submission
+         */
+        $validate_error = array();
+        $site_global_settings=Setting::find(1);
+        $category_name_tranlate=[];
+        foreach (Setting::LANGUAGES as $setting_languages_key => $language){
+            if (!\Illuminate\Support\Facades\Schema::hasTable('settings_languages')){
+                continue;
+            }
+            if ($site_global_settings->settingLanguage->$language == \App\SettingLanguage::LANGUAGE_ENABLE){
+                if ($request->has('category_name_'. $setting_languages_key)
+                    &&!empty($request->input('category_name_'. $setting_languages_key))
+                ){
+                    $category_name=$request->input('category_name_'. $setting_languages_key);
+                    $category_name_exist = Category::where('category_name->'.$setting_languages_key, $category_name)
+                        ->where('id', '!=', $category->id)->count();
+                    if($category_name_exist > 0) {
+                        $validate_error['category_name_'. $setting_languages_key] = __('categories.category-name-taken-error').' '. $setting_languages_key;
+                        break;
+                    }
+                    $category_name_tranlate[$setting_languages_key]=$category_name;
+                }
+            }
+        }
         $category_slug = strtolower($request->category_slug);
         $category_description = empty($request->category_description) ? null : $request->category_description;
         $category_parent_id = empty($request->category_parent_id) ? null : $request->category_parent_id;
@@ -385,16 +425,6 @@ class CategoryController extends Controller
         $category_header_background_image = empty($request->category_header_background_image) ? null : $request->category_header_background_image;
         $category_header_background_youtube_video = empty($request->category_header_background_youtube_video) ? null : $request->category_header_background_youtube_video;
 
-        /**
-         * Start validate submission
-         */
-        $validate_error = array();
-        $category_name_exist = Category::where('category_name', $category_name)
-            ->where('id', '!=', $category->id)->count();
-        if($category_name_exist > 0)
-        {
-            $validate_error['category_name'] = __('categories.category-name-taken-error');
-        }
         $category_slug_exist = Category::where('category_slug', $category_slug)
             ->where('id', '!=', $category->id)->count();
         if($category_slug_exist > 0)
@@ -499,7 +529,7 @@ class CategoryController extends Controller
          * End save category header background image
          */
 
-        $category->category_name = $category_name;
+        $category->setTranslations('category_name',$category_name_tranlate);
         $category->category_slug = $category_slug;
         $category->category_parent_id = $category_parent_id;
         $category->category_description = $category_description;

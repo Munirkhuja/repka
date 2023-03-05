@@ -63,13 +63,19 @@
 
                                 <div class="form-row mb-3">
                                     <div class="col-md-4">
-                                        <label for="category_name" class="text-black">{{ __('backend.category.category-name') }}</label>
-                                        <input id="category_name" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ old('category_name') ? old('category_name') : $category->category_name }}">
-                                        @error('category_name')
-                                        <span class="invalid-tooltip">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                                        @foreach(\App\Setting::LANGUAGES as $setting_languages_key => $language)
+                                            @if(\Illuminate\Support\Facades\Schema::hasTable('settings_languages'))
+                                                @if($site_global_settings->settingLanguage->$language == \App\SettingLanguage::LANGUAGE_ENABLE)
+                                                    <label for="category_name_{{ $setting_languages_key }}" class="text-black">{{ __('backend.category.category-name') }}-{{ __('prefer_languages.' . $setting_languages_key) }}</label>
+                                                    <input id="category_name_{{ $setting_languages_key }}" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name_{{ $setting_languages_key }}" value="{{ old('category_name_'. $setting_languages_key) ? old('category_name_'. $setting_languages_key) : (isset($category->getTranslations('category_name')[$setting_languages_key])?$category->getTranslations('category_name')[$setting_languages_key]:'') }}">
+                                                    @error('category_name_'. $setting_languages_key)
+                                                    <span class="invalid-tooltip">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                @endif
+                                            @endif
+                                        @endforeach
                                     </div>
 
                                     <div class="col-md-4">
