@@ -106,4 +106,4 @@
     <!-- </div> -->
 
 </header>
-<?php /**PATH C:\OSPanel\domains\repka\resources\views/frontend/partials/nav.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\OSPanel\domains\repka\laravel_project\resources\views/frontend/partials/nav.blade.php ENDPATH**/ ?>

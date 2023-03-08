@@ -736,4 +736,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('frontend.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\OSPanel\domains\repka\resources\views/frontend/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('frontend.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\OSPanel\domains\repka\laravel_project\resources\views/frontend/index.blade.php ENDPATH**/ ?>

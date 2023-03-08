@@ -37,4 +37,4 @@ unset($__errorArgs, $__bag); ?>
 
     </div>
 </form>
-<?php /**PATH C:\OSPanel\domains\repka\resources\views/frontend/partials/search/head.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\OSPanel\domains\repka\laravel_project\resources\views/frontend/partials/search/head.blade.php ENDPATH**/ ?>

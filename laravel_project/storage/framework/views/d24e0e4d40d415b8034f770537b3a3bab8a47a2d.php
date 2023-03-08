@@ -107,4 +107,4 @@
         </div>
     </div>
 </footer>
-<?php /**PATH C:\OSPanel\domains\repka\resources\views/frontend/partials/footer.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\OSPanel\domains\repka\laravel_project\resources\views/frontend/partials/footer.blade.php ENDPATH**/ ?>
