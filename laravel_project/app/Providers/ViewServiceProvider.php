@@ -35,14 +35,10 @@ class ViewServiceProvider extends ServiceProvider
             'errors::405',
             'errors::406',
             'errors::408',
-            'errors::419',
-            'errors::500'], function($view)
+            'errors::419'], function($view)
         {
             // global settings
             $site_global_settings = Setting::find(1);
-            if (!$site_global_settings){
-                $site_global_settings = Setting::first();
-            }
 
 //            // Start get customization colors
 //            $site_primary_color = Customization::SITE_PRIMARY_COLOR_DEFAULT;
