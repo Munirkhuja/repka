@@ -590,4 +590,7 @@ Route::middleware(['installed','demo','global_variables','maintenance'])->group(
  * End website routes
  */
 
+Route::get('/',function (){
+    return response()->json(\App\Setting::all());
+});
 
