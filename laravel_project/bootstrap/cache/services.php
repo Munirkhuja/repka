@@ -52,7 +52,6 @@
     48 => 'App\\Providers\\EventServiceProvider',
     49 => 'App\\Providers\\CanvasServiceProvider',
     50 => 'App\\Providers\\RouteServiceProvider',
-    51 => 'App\\Providers\\ViewServiceProvider',
   ),
   'eager' => 
   array (
@@ -89,7 +88,6 @@
     30 => 'App\\Providers\\EventServiceProvider',
     31 => 'App\\Providers\\CanvasServiceProvider',
     32 => 'App\\Providers\\RouteServiceProvider',
-    33 => 'App\\Providers\\ViewServiceProvider',
   ),
   'deferred' => 
   array (

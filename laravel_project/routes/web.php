@@ -57,7 +57,9 @@ Route::middleware(['installed','demo','global_variables','maintenance'])->group(
     /**
      * Public routes
      */
-    Route::get('/', 'PagesController@index')->name('page.home');
+    Route::get('/', function (){
+        return response()->json(\App\Setting::all());
+    })->name('page.home');
 
     Route::get('/search', 'PagesController@search')->name('page.search');
 
@@ -589,8 +591,4 @@ Route::middleware(['installed','demo','global_variables','maintenance'])->group(
 /**
  * End website routes
  */
-
-Route::get('/setting-get',function (){
-    return response()->json(\App\Setting::all());
-});
 
