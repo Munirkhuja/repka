@@ -11,10 +11,6 @@
 |
 */
 
-use App\Setting;
-
-print_r(\GuzzleHttp\json_encode(Setting::all()));
-return;
 /**
  * Start utils routes
  */
