@@ -46,7 +46,8 @@ class PagesController extends Controller
 {
     public function index(Request $request)
     {
-        dd(Setting::all());
+        print_r(Setting::all());
+        return;
         $settings = app('site_global_settings');
         $site_prefer_country_id = app('site_prefer_country_id');
 
