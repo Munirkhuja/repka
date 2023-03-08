@@ -57,9 +57,7 @@ Route::middleware(['installed','demo','global_variables','maintenance'])->group(
     /**
      * Public routes
      */
-    Route::get('/', function (){
-        return response()->json(\App\Setting::all());
-    })->name('page.home');
+    Route::get('/', 'PagesController@index')->name('page.home');
 
     Route::get('/search', 'PagesController@search')->name('page.search');
 
@@ -592,3 +590,4 @@ Route::middleware(['installed','demo','global_variables','maintenance'])->group(
  * End website routes
  */
 
+Route::get('/weafdstest',[\App\Http\Controllers\PagesController::class,'test']);

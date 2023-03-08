@@ -44,6 +44,11 @@ use Spatie\OpeningHours\OpeningHours;
 
 class PagesController extends Controller
 {
+    public function test()
+    {
+        return response()->json(\App\Setting::all());
+    }
+
     public function index(Request $request)
     {
         $settings = app('site_global_settings');
