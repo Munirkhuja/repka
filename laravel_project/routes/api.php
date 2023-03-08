@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-\Illuminate\Support\Facades\Route::get('',function (){
+Route::get('',function (){
     return response()->json(\App\Setting::all());
 });
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
