@@ -29,6 +29,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        dd(Setting::all());
         view()->composer([
             'errors::403',
             'errors::404',
@@ -40,9 +41,8 @@ class ViewServiceProvider extends ServiceProvider
         {
             // global settings
             $site_global_settings = Setting::find(1);
-            if (!$site_global_settings){
-                dd(Setting::all());
-            }
+//            if (!$site_global_settings){
+//            }
 
 //            // Start get customization colors
 //            $site_primary_color = Customization::SITE_PRIMARY_COLOR_DEFAULT;
